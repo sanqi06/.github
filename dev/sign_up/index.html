@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://openhutb.github.io/.github/dev/sign_up/" rel="canonical"/>
 <link href="../../img/favicon.ico" rel="shortcut icon"/>
 <title>注册 Github 账号 - 社区介绍</title>
 <link href="../../css/theme.css" rel="stylesheet"/>
@@ -14,7 +14,7 @@
         // Current page data
         var mkdocs_page_name = "\u6ce8\u518c Github \u8d26\u53f7";
         var mkdocs_page_input_path = "dev/sign_up.md";
-        var mkdocs_page_url = null;
+        var mkdocs_page_url = "/.github/dev/sign_up/";
       </script>
 <!--[if lt IE 9]>
       <script src="../../js/html5shiv.min.js"></script>
@@ -30,7 +30,7 @@
 <a class="icon icon-home" href="../.."> 社区介绍
         </a><div role="search">
 <form action="../../search.html" class="wy-form" id="rtd-search-form" method="get">
-<input aria-label="Search docs" name="q" placeholder="搜索文档" title="Type search term here" type="text"/>
+<input aria-label="Search docs" name="q" placeholder="Search docs" title="Type search term here" type="text"/>
 </form>
 </div>
 </div>
@@ -79,11 +79,13 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../codespace/">基于浏览器的贡献指南</a>
 </li>
-<li class="toctree-l1 current"><a class="reference internal current" href="#">注册 Github 账号</a>
+<li class="toctree-l1 current"><a class="reference internal current" href="./">注册 Github 账号</a>
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="#异常情况">异常情况</a>
 </li>
 </ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../vscode_push/">使用 VScode 推送代码</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../pycharm-tutorial/">PyCharm 教程</a>
 </li>
@@ -94,6 +96,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../vm_disk/">给 Ubuntu 虚拟机硬盘扩容</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../note/">注意事项</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../wsl/">wsl 安装与配置和卸载</a>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">工具与资源</span></p>
@@ -109,8 +113,6 @@
 </ul>
 <p class="caption"><span class="caption-text">学习与论文</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../bib_reference_guide/">Latex文献引用编译办法</a>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../../undergraduate/">本科毕业设计</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../paper/avf/">论文成果：AVF-BEL 视听融合</a>
@@ -135,49 +137,58 @@
 <li class="breadcrumb-item">贡献相关</li>
 <li class="breadcrumb-item active">注册 Github 账号</li>
 <li class="wy-breadcrumbs-aside">
-<a href="https://github.com/OpenHUTB/.github/edit/master/docs/dev/sign_up.md"> 编辑页面</a>
+<a class="icon icon-github" href="https://github.com/OpenHUTB/.github/edit/master/docs/dev/sign_up.md"> Edit on GitHub</a>
 </li>
 </ul>
 <hr/>
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<div><h1 id="注册-github-账号">注册 Github 账号</h1>
+<div><h1 id="注册-github-账号">注册 GitHub 账号</h1>
 <ol>
 <li>
-<p>首先进入 <a href="https://github.com/signup">github 官网的注册页面</a>（Sign up是注册），Sign in 是登录；</p>
+<p>首先进入 <a href="https://github.com/signup">GitHub 官网的注册页面</a>。<code>Sign up</code> 是注册，<code>Sign in</code> 是登录；如果已经有账号，直接登录即可，不要重复注册。</p>
 </li>
 <li>
-<p>填写自己常用邮箱（比如 <a href="https://mail.qq.com/">QQ</a>、<a href="https://mail.163.com/">163</a>、<a href="https://mail.google.com/mail?hl=zh-CN">Gmail</a> 等邮箱，并且保证手机能够收到新邮件的提醒）、密码、用户名等信息，然后用邮箱验证即可完成。</p>
+<p>填写自己常用且能正常收信的邮箱（比如 <a href="https://mail.qq.com/">QQ</a>、<a href="https://mail.163.com/">163</a>、<a href="https://mail.google.com/mail?hl=zh-CN">Gmail</a> 等）、密码和用户名。密码不要与其他网站重复，也不要发给他人；提交后按邮件提示完成验证。</p>
+</li>
+<li>
+<p>注册完成后先确认能够正常登录，再在个人设置中检查邮箱是否已验证。之后 Fork 仓库、提交修改和接收通知都会使用这个账号。</p>
 </li>
 </ol>
 <p><img alt="" src="../../img/dev/sign_up.jpg"/></p>
 <h2 id="异常情况">异常情况</h2>
 <ul>
 <li>
-<p>点击“Create account”后需要进行一个验证过程，保证是真人，而不是 AI</p>
-<p>解决：继续验证，可以选择图片验证，可以选择声音验证，可能会有延迟，但是按照步骤一步一步来，直到验证通过。</p>
+<p>点击“Create account”后需要进行验证，以确认当前操作由真人完成</p>
+<p>解决：按页面提示完成图片或声音验证，等待页面给出结果后再继续，不要在验证尚未完成时反复刷新。</p>
 </li>
 <li>
 <p>如果出现“Unable to verify your captcha response...”问题</p>
-<p>解决：尝试使用不同的网络环境、不同邮箱、不同设备进行注册。</p>
+<p>解决：先检查网络是否稳定，关闭会拦截验证页面的扩展，再重新打开注册页。仍然失败时，可以间隔一段时间后重试；更换邮箱或设备应放在最后，并确保新邮箱确实能收信。</p>
 </li>
 <li>
-<p>如果还是不能解决</p>
-<p>解决：在注册页面直接选择 Continue with Google，使用 Google 账号注册，就可以完成注册（请参考<a href="https://www.google.com/intl/zh-CN/account/about/">Google 账号注册页面</a>，注意这种方法需要<a href="https://openhutb.github.io/doc/build_carla/#internet">科学上网</a>）。</p>
+<p>如果注册邮件没有收到</p>
+<p>解决：先查看垃圾邮件、广告邮件和邮箱过滤规则，确认填写的地址没有拼写错误，再从 GitHub 页面重新发送验证邮件。不要把邮件中的验证链接或验证码发到公开 Issue、群聊或评论区。</p>
+</li>
+<li>
+<p>如果上述方法仍不能解决</p>
+<p>解决：记录页面显示的完整错误、发生时间和使用的浏览器，再到 <a href="https://support.github.com/">GitHub Support</a> 查询。也可以在注册页面选择 <code>Continue with Google</code>，但请先确认自己能够正常使用该 Google 账号；第三方账号的安全设置仍由账号本人负责。</p>
 </li>
 </ul></div>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-left" href="../../codespace/" title="基于浏览器的贡献指南"><span class="icon icon-circle-arrow-left"></span> 前一页</a>
-<a class="btn btn-neutral float-right" href="../../pycharm-tutorial/" title="PyCharm 教程">后一页 <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-left" href="../../codespace/" title="基于浏览器的贡献指南"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../vscode_push/" title="使用 VScode 推送代码">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">
 <!-- Copyright etc -->
 <p>OpenHUTB 版权所有 © 2026</p>
 </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
 </div>
 </div>
@@ -186,10 +197,10 @@
 <div aria-label="Versions" class="rst-versions" role="note">
 <span class="rst-current-version" data-toggle="rst-current-version">
 <span>
-<a href="https://github.com/OpenHUTB/.github" style="color: #fcfcfc">OpenHUTB</a>
+<a class="fa fa-github" href="https://github.com/OpenHUTB/.github" style="color: #fcfcfc"> GitHub</a>
 </span>
-<span><a href="../../codespace/" style="color: #fcfcfc">« 前一页</a></span>
-<span><a href="../../pycharm-tutorial/" style="color: #fcfcfc">后一页 »</a></span>
+<span><a href="../../codespace/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../vscode_push/" style="color: #fcfcfc">Next »</a></span>
 </span>
 </div>
 <script src="../../js/jquery-3.6.0.min.js"></script>

@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://openhutb.github.io/.github/bib_reference_guide/" rel="canonical"/>
 <link href="../img/favicon.ico" rel="shortcut icon"/>
 <title>Latex文献引用编译办法 - 社区介绍</title>
 <link href="../css/theme.css" rel="stylesheet"/>
@@ -14,7 +14,7 @@
         // Current page data
         var mkdocs_page_name = "Latex\u6587\u732e\u5f15\u7528\u7f16\u8bd1\u529e\u6cd5";
         var mkdocs_page_input_path = "bib_reference_guide.md";
-        var mkdocs_page_url = null;
+        var mkdocs_page_url = "/.github/bib_reference_guide/";
       </script>
 <!--[if lt IE 9]>
       <script src="../js/html5shiv.min.js"></script>
@@ -30,7 +30,7 @@
 <a class="icon icon-home" href=".."> 社区介绍
         </a><div role="search">
 <form action="../search.html" class="wy-form" id="rtd-search-form" method="get">
-<input aria-label="Search docs" name="q" placeholder="搜索文档" title="Type search term here" type="text"/>
+<input aria-label="Search docs" name="q" placeholder="Search docs" title="Type search term here" type="text"/>
 </form>
 </div>
 </div>
@@ -56,7 +56,7 @@
 </li>
 </ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal current" href="#">Latex文献引用编译办法</a>
+<li class="toctree-l1 current"><a class="reference internal current" href="./">Latex文献引用编译办法</a>
 <ul class="current">
 </ul>
 </li>
@@ -83,6 +83,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/sign_up/">注册 Github 账号</a>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/vscode_push/">使用 VScode 推送代码</a>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../pycharm-tutorial/">PyCharm 教程</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../resolve_conflict/">使用 TortoiseGit 解决冲突</a>
@@ -92,6 +94,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../dev/vm_disk/">给 Ubuntu 虚拟机硬盘扩容</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../note/">注意事项</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../wsl/">wsl 安装与配置和卸载</a>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">工具与资源</span></p>
@@ -106,11 +110,7 @@
 </li>
 </ul>
 <p class="caption"><span class="caption-text">学习与论文</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal current" href="#">Latex文献引用编译办法</a>
-<ul class="current">
-</ul>
-</li>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../undergraduate/">本科毕业设计</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../paper/avf/">论文成果：AVF-BEL 视听融合</a>
@@ -132,10 +132,9 @@
 <div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
 <ul class="wy-breadcrumbs">
 <li><a aria-label="Docs" class="icon icon-home" href=".."></a></li>
-<li class="breadcrumb-item">学习与论文</li>
 <li class="breadcrumb-item active">Latex文献引用编译办法</li>
 <li class="wy-breadcrumbs-aside">
-<a href="https://github.com/OpenHUTB/.github/edit/master/docs/bib_reference_guide.md"> 编辑页面</a>
+<a class="icon icon-github" href="https://github.com/OpenHUTB/.github/edit/master/docs/bib_reference_guide.md"> Edit on GitHub</a>
 </li>
 </ul>
 <hr/>
@@ -248,8 +247,8 @@ style<span class="nb">{</span>gb7714-2015<span class="nb">}</span>
 <code>.bbl</code>是系统自动生成文件，所有修改会被下一次编译覆盖，文献修改、增删只能在<code>.bib</code>文件中操作。</p>
 </li>
 <li>
-<p><strong>引用标签唯一不重复</strong>
-整篇论文中，每一个文献 key 只能出现一次，重复会直接导致标号错乱、文献串位。</p>
+<p><strong>文献条目的 key 需要唯一</strong>
+同一个 <code>.bib</code> 文件中，不同文献条目不能使用相同的 key，否则 BibTeX 无法准确区分条目。同一个 key 可以在正文的多处 <code>\cite{}</code> 中重复使用，这些位置会指向同一条参考文献。</p>
 </li>
 <li>
 <p><strong>严格区分中英文符号</strong>
@@ -260,9 +259,8 @@ bib 文件内所有标点、括号、逗号必须是英文半角，中文符号�
 增删文献、修改文献信息、调整引用位置后，必须完整执行四轮编译，否则格式不更新。</p>
 </li>
 <li>
-<p><strong>异常报错万能修复法</strong>
-出现标号错乱、文献丢失、莫名报错：
-手动删除所有 <code>.aux .bbl .blg .log</code> 辅助文件，再完整执行四步编译，可解决 90% 问题。</p>
+<p><strong>重新生成辅助文件</strong>
+修改引用后仍出现旧编号或旧内容时，可以先查看 <code>.blg</code> 和 <code>.log</code> 中的报错。确认 <code>.bib</code> 语法、文件名和 key 都正确后，再删除 <code>.aux</code>、<code>.bbl</code>、<code>.blg</code>、<code>.log</code> 等辅助文件，并按完整顺序重新编译。清理辅助文件适合解决缓存的旧结果，不能替代对原始错误的检查。</p>
 </li>
 <li>
 <p><strong>区分中英文编译环境</strong>
@@ -273,20 +271,22 @@ bib 文件内所有标点、括号、逗号必须是英文半角，中文符号�
 <ol>
 <li>一次 PDF 扫引用 →  BibTeX 生成文献 → 两次 PDF 刷新格式</li>
 <li>所有文献数据只改 bib 文件，不动自动生成文件</li>
-<li>符号统一英文、标签统一匹配、编译顺序不缺失</li>
-<li>异常优先清理辅助文件重编译</li>
+<li>符号统一英文、key 唯一并与引用匹配、编译顺序不缺失</li>
+<li>异常先查看日志并修正原始问题，必要时清理辅助文件后重编译</li>
 </ol></div>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-left" href="../markdown2anything/" title="Markdown 一键发布到社交平台"><span class="icon icon-circle-arrow-left"></span> 前一页</a>
-<a class="btn btn-neutral float-right" href="../undergraduate/" title="本科毕业设计">后一页 <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-left" href="../paper_tips/" title="论文写作技巧"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../env_conf/" title="搭建自定义开发环境">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">
 <!-- Copyright etc -->
 <p>OpenHUTB 版权所有 © 2026</p>
 </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
 </div>
 </div>
@@ -295,10 +295,10 @@ bib 文件内所有标点、括号、逗号必须是英文半角，中文符号�
 <div aria-label="Versions" class="rst-versions" role="note">
 <span class="rst-current-version" data-toggle="rst-current-version">
 <span>
-<a href="https://github.com/OpenHUTB/.github" style="color: #fcfcfc">OpenHUTB</a>
+<a class="fa fa-github" href="https://github.com/OpenHUTB/.github" style="color: #fcfcfc"> GitHub</a>
 </span>
-<span><a href="../markdown2anything/" style="color: #fcfcfc">« 前一页</a></span>
-<span><a href="../undergraduate/" style="color: #fcfcfc">后一页 »</a></span>
+<span><a href="../paper_tips/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../env_conf/" style="color: #fcfcfc">Next »</a></span>
 </span>
 </div>
 <script src="../js/jquery-3.6.0.min.js"></script>

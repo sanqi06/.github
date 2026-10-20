@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://openhutb.github.io/.github/blender/" rel="canonical"/>
 <link href="../img/favicon.ico" rel="shortcut icon"/>
 <title>三维建模软件 Blender 介绍 - 社区介绍</title>
 <link href="../css/theme.css" rel="stylesheet"/>
@@ -14,7 +14,7 @@
         // Current page data
         var mkdocs_page_name = "\u4e09\u7ef4\u5efa\u6a21\u8f6f\u4ef6 Blender \u4ecb\u7ecd";
         var mkdocs_page_input_path = "blender.md";
-        var mkdocs_page_url = null;
+        var mkdocs_page_url = "/.github/blender/";
       </script>
 <!--[if lt IE 9]>
       <script src="../js/html5shiv.min.js"></script>
@@ -30,7 +30,7 @@
 <a class="icon icon-home" href=".."> 社区介绍
         </a><div role="search">
 <form action="../search.html" class="wy-form" id="rtd-search-form" method="get">
-<input aria-label="Search docs" name="q" placeholder="搜索文档" title="Type search term here" type="text"/>
+<input aria-label="Search docs" name="q" placeholder="Search docs" title="Type search term here" type="text"/>
 </form>
 </div>
 </div>
@@ -81,6 +81,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/sign_up/">注册 Github 账号</a>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/vscode_push/">使用 VScode 推送代码</a>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../pycharm-tutorial/">PyCharm 教程</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../resolve_conflict/">使用 TortoiseGit 解决冲突</a>
@@ -91,6 +93,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../note/">注意事项</a>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../wsl/">wsl 安装与配置和卸载</a>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">工具与资源</span></p>
 <ul class="current">
@@ -98,7 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/">开源工具列表</a>
 </li>
-<li class="toctree-l1 current"><a class="reference internal current" href="#">三维建模软件 Blender 介绍</a>
+<li class="toctree-l1 current"><a class="reference internal current" href="./">三维建模软件 Blender 介绍</a>
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="#1-blender-是什么">1. Blender 是什么 </a>
 </li>
@@ -117,6 +121,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#6-从-blender-到模拟器">6. 从 Blender 到模拟器 </a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#只导出需要的模型">只导出需要的模型</a>
+</li>
+</ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#7-学习资源">7. 学习资源 </a>
 </li>
@@ -129,8 +137,6 @@
 </ul>
 <p class="caption"><span class="caption-text">学习与论文</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../bib_reference_guide/">Latex文献引用编译办法</a>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../undergraduate/">本科毕业设计</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../paper/avf/">论文成果：AVF-BEL 视听融合</a>
@@ -155,7 +161,7 @@
 <li class="breadcrumb-item">工具与资源</li>
 <li class="breadcrumb-item active">三维建模软件 Blender 介绍</li>
 <li class="wy-breadcrumbs-aside">
-<a href="https://github.com/OpenHUTB/.github/edit/master/docs/blender.md"> 编辑页面</a>
+<a class="icon icon-github" href="https://github.com/OpenHUTB/.github/edit/master/docs/blender.md"> Edit on GitHub</a>
 </li>
 </ul>
 <hr/>
@@ -163,8 +169,8 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <div><h1 id="三维建模软件-blender-介绍">三维建模软件 Blender 介绍</h1>
-<p>本文是<strong>入门篇</strong>，只覆盖三件事：Blender 是什么、怎么下载安装、基本界面和操作。阅读本文不需要任何编程或建模基础。</p>
-<p>更深入的内容（建模流程、骨骼绑定、材质与动画、导出规范等）会随着社区的具体任务逐步补充。</p>
+<p>本文为入门篇，介绍Blender的定义、下载安装与基础界面操作，阅读无需编程或建模基础。
+进阶内容（建模流程、骨骼绑定、材质动画、导出规范等）将随社区任务持续补充。</p>
 <ul>
 <li><a href="#what">1. Blender 是什么</a></li>
 <li><a href="#role">2. 它在社区里做什么</a></li>
@@ -177,7 +183,7 @@
 </ul>
 <hr/>
 <h2 id="1-blender-是什么">1. Blender 是什么 <span id="what"></span></h2>
-<p>Blender 是一款免费、开源的三维创作软件，由荷兰的 Blender Foundation 维护，官网为 <a href="https://www.blender.org">https://www.blender.org</a>。它覆盖三维制作的完整流程：建模、雕刻、UV 展开、骨骼绑定、动画、物理模拟、渲染、合成与视频剪辑。</p>
+<p>Blender 是一款免费、开源的三维创作软件，由荷兰的 Blender Foundation 维护，官网为  <a href="https://www.blender.org">https://www.blender.org</a>。它覆盖三维制作的完整流程：建模、雕刻、UV 展开、骨骼绑定、动画、物理模拟、渲染、合成与视频剪辑。</p>
 <p>与 Maya、3ds Max、Cinema 4D 等商业软件相比，Blender 的主要特点是：</p>
 <ul>
 <li><strong>免费且开源</strong>：采用 GNU GPL 协议，不需要授权、许可密钥或账号，全部功能开箱即用；</li>
@@ -221,7 +227,8 @@
 <p>国内网络下下载速度较慢时，可以使用高校或云厂商的镜像站，例如：</p>
 <ul>
 <li>清华大学 TUNA：<a href="https://mirrors.tuna.tsinghua.edu.cn/blender/">https://mirrors.tuna.tsinghua.edu.cn/blender/</a></li>
-<li>中国科学技术大学：<a href="https://mirrors.ustc.edu.cn/blender/">https://mirrors.ustc.edu.cn/blender/</a></li>
+<li>南京大学：<a href="https://mirror.nju.edu.cn/blender/">https://mirror.nju.edu.cn/blender/</a></li>
+<li>阿里云开源镜像站：<a href="https://mirrors.aliyun.com/blender/release/Blender4.3/">https://mirrors.aliyun.com/blender/release/Blender4.3/</a></li>
 </ul>
 <p>各平台的获取方式：</p>
 <table>
@@ -382,13 +389,21 @@
 <li><strong>确认场景单位与目标引擎一致</strong>，避免模型整体过大或过小；</li>
 <li><strong>确认模型朝向</strong>：不同软件的正向轴约定不同（Blender 默认 Z 轴向上，部分引擎为 Y 轴向上），导出设置中通常有相应的轴向选项，导入后偏差较大时优先检查这一项。</li>
 </ol>
-<p>导出完成后，建议在引擎中实际导入一次验证效果，而不是只看 Blender 里的预览。</p>
+<h3 id="只导出需要的模型">只导出需要的模型</h3>
+<p>默认场景里还有摄像机和灯光，制作过程中也可能留下参考物体。导出单个资产时，可以按下面的顺序操作：</p>
+<ol>
+<li>先将工程保存为 <code>.blend</code> 文件，保留后续编辑所需的内容。</li>
+<li>在物体模式下选中要交付的物体。带骨骼的模型需要同时选中网格和对应骨架，避免只导出模型外形。</li>
+<li>打开「File → Export → FBX」，在导出选项的「Include → Limit to」中勾选「Selected Objects」，将范围限制为选中的物体。这个选项用于普通导出，不适用于批量导出。</li>
+<li>导出后，在一个空场景中重新导入，检查物体数量、尺寸和朝向，确认没有混入摄像机、灯光或参考物体，再到目标引擎中核对效果。</li>
+</ol>
+<p>FBX 用于交付模型，<code>.blend</code> 用于继续编辑，两者建议一并保留。选项的具体说明可查看 <a href="https://docs.blender.org/manual/en/4.4/addons/import_export/scene_fbx.html">Blender 官方 FBX 手册</a>。</p>
 <p>社区文档站为 <a href="https://openhutb.github.io/">https://openhutb.github.io/</a>，模型接入模拟器的具体流程以该站对应项目的说明为准；遇到问题可以在相关仓库的 Issues 页面提出。</p>
 <h2 id="7-学习资源">7. 学习资源 <span id="learn"></span></h2>
 <ul>
 <li>Blender 官方手册（含简体中文）：<a href="https://docs.blender.org/manual/zh-hans/">https://docs.blender.org/manual/zh-hans/</a></li>
 <li>Blender 官方教程页：<a href="https://www.blender.org/support/tutorials/">https://www.blender.org/support/tutorials/</a></li>
-<li>Blender Studio 官方基础培训（免费，持续更新）：<a href="https://studio.blender.org/training/blender-fundamentals/">https://studio.blender.org/training/blender-fundamentals/</a></li>
+<li>Blender Studio 官方基础培训（免费，持续更新）：<a href="https://studio.blender.org/training/">https://studio.blender.org/training/</a></li>
 </ul>
 <p>学习建议：不必系统看完整套课程。先用默认场景里的立方体把「旋转视角、移动物体、切到编辑模式改形状」这几件事做完一遍，再带着具体目标去查对应章节，效率更高。</p>
 <h2 id="8-常见问题">8. 常见问题 <span id="faq"></span></h2>
@@ -412,14 +427,16 @@
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-left" href="../tools/" title="开源工具列表"><span class="icon icon-circle-arrow-left"></span> 前一页</a>
-<a class="btn btn-neutral float-right" href="../markdown2anything/" title="Markdown 一键发布到社交平台">后一页 <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-left" href="../tools/" title="开源工具列表"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../markdown2anything/" title="Markdown 一键发布到社交平台">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr>
 <div role="contentinfo">
 <!-- Copyright etc -->
 <p>OpenHUTB 版权所有 © 2026</p>
 </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </hr></footer>
 </div>
 </div>
@@ -428,10 +445,10 @@
 <div aria-label="Versions" class="rst-versions" role="note">
 <span class="rst-current-version" data-toggle="rst-current-version">
 <span>
-<a href="https://github.com/OpenHUTB/.github" style="color: #fcfcfc">OpenHUTB</a>
+<a class="fa fa-github" href="https://github.com/OpenHUTB/.github" style="color: #fcfcfc"> GitHub</a>
 </span>
-<span><a href="../tools/" style="color: #fcfcfc">« 前一页</a></span>
-<span><a href="../markdown2anything/" style="color: #fcfcfc">后一页 »</a></span>
+<span><a href="../tools/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../markdown2anything/" style="color: #fcfcfc">Next »</a></span>
 </span>
 </div>
 <script src="../js/jquery-3.6.0.min.js"></script>

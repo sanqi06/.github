@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://openhutb.github.io/.github/paper_tips/" rel="canonical"/>
 <link href="../img/favicon.ico" rel="shortcut icon"/>
 <title>论文写作技巧 - 社区介绍</title>
 <link href="../css/theme.css" rel="stylesheet"/>
@@ -14,7 +14,7 @@
         // Current page data
         var mkdocs_page_name = "\u8bba\u6587\u5199\u4f5c\u6280\u5de7";
         var mkdocs_page_input_path = "paper_tips.md";
-        var mkdocs_page_url = null;
+        var mkdocs_page_url = "/.github/paper_tips/";
       </script>
 <!--[if lt IE 9]>
       <script src="../js/html5shiv.min.js"></script>
@@ -30,7 +30,7 @@
 <a class="icon icon-home" href=".."> 社区介绍
         </a><div role="search">
 <form action="../search.html" class="wy-form" id="rtd-search-form" method="get">
-<input aria-label="Search docs" name="q" placeholder="搜索文档" title="Type search term here" type="text"/>
+<input aria-label="Search docs" name="q" placeholder="Search docs" title="Type search term here" type="text"/>
 </form>
 </div>
 </div>
@@ -52,7 +52,7 @@
 </li>
 </ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal current" href="#">论文写作技巧</a>
+<li class="toctree-l1 current"><a class="reference internal current" href="./">论文写作技巧</a>
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="#目录">目录</a>
 </li>
@@ -85,6 +85,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/sign_up/">注册 Github 账号</a>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/vscode_push/">使用 VScode 推送代码</a>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../pycharm-tutorial/">PyCharm 教程</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../resolve_conflict/">使用 TortoiseGit 解决冲突</a>
@@ -94,6 +96,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../dev/vm_disk/">给 Ubuntu 虚拟机硬盘扩容</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../note/">注意事项</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../wsl/">wsl 安装与配置和卸载</a>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">工具与资源</span></p>
@@ -109,8 +113,6 @@
 </ul>
 <p class="caption"><span class="caption-text">学习与论文</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../bib_reference_guide/">Latex文献引用编译办法</a>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../undergraduate/">本科毕业设计</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../paper/avf/">论文成果：AVF-BEL 视听融合</a>
@@ -134,7 +136,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href=".."></a></li>
 <li class="breadcrumb-item active">论文写作技巧</li>
 <li class="wy-breadcrumbs-aside">
-<a href="https://github.com/OpenHUTB/.github/edit/master/docs/paper_tips.md"> 编辑页面</a>
+<a class="icon icon-github" href="https://github.com/OpenHUTB/.github/edit/master/docs/paper_tips.md"> Edit on GitHub</a>
 </li>
 </ul>
 <hr/>
@@ -180,15 +182,14 @@
 <p>排版是通过排列字体（例如字母和符号）来编写文本的过程。这主要关乎美观，但精美的字体设计能让文档更易于阅读，更赏心悦目，帮助读者更好地理解信息。</p>
 <p>我们列出了一些排版技巧和工具，可以更好帮助您撰写文档。其中一些技巧仅适用于 LaTeX，但其他技巧则适用于任何语言。</p>
 <h2 id="每行一个句子">每行一个句子</h2>
-<p>编写 LaTeX 文档时，请在源文件中每行都放一个句子。例如：
-编写 LaTeX 文档时，请在源文件中每行只放一个句子。例如：
+<p>编写 LaTeX 文档时，请在源文件中每行只放一个句子。例如：
 </p><div class="highlight"><pre><span></span><code>This is my first sentence.
 This is the second one.
 </code></pre></div>
 而不是：
 <div class="highlight"><pre><span></span><code>This is my first sentence. This is the second one.
 </code></pre></div>
-<p>这样做的主要原因是为了更好的对源代码控制和协作：查看提交的更改时，每个句子都单独放在一行，就能更容易地识别哪些句子被更改了。这样，你的同志就能更容易地看到更改。</p>
+<p>这样做的主要原因是为了更好的对源代码控制和协作：查看提交的更改时，每个句子都单独放在一行，就能更容易地识别哪些句子被更改了。这样，你的同事就能更容易地看到更改。</p>
 <p>另一个好处是，当我们的 LaTeX 编译器仅给出行号时，您将能够更快速地识别错误。</p>
 <h2 id="大写">大写</h2>
 <p>下面我们将提到两种大写类型：</p>
@@ -241,10 +242,9 @@ This is the second one.
 </code></pre></div>
 <p><img alt="Booktabs example" src="https://github.com/Wookai/paper-tips-and-tricks/raw/master/examples/booktabs/booktabs.png"/></p>
 <p>一般来说，避免在表格中使用垂直线。如果要对列进行分组，请在标题中使用<code>\cmidrule</code> 进行分组。您也可以使用 <code>\addlinespace</code> 用空格代替水平线。</p>
-<p>列标题应使用句子格式大写（请参阅 http://www.chicagomanualofstyle.org/15/ch13/ch13_sec019.html ）。</p>
+<p>列标题应使用句子格式大写（请参阅 https://www.chicagomanualofstyle.org/qanda/data/faq/topics/Capitalization.html ）。</p>
 <p>您可以在这里找到更多关于表格格式的建议： http://www.inf.ethz.ch/personal/markusp/teaching/guides/guide-tables.pdf 。
-这里有一个很棒的 GIF，演示了其中一些规则：</p>
-<p><img alt="Better table formatting" src="http://darkhorseanalytics.com/blog/wp-content/uploads/2014/03/ClearOffTheTableMd.gif"/></p>
+这里有一份表格示例，演示了其中一些规则：<a href="https://github.com/Wookai/paper-tips-and-tricks/tree/master/examples/booktabs">paper-tips-and-tricks 表格示例</a>。</p>
 <h2 id="数字格式">数字格式</h2>
 <p><a href="https://github.com/Wookai/paper-tips-and-tricks/tree/master/examples/siunitx">(完整示例)</a></p>
 <p>使用 <a href="https://ctan.org/pkg/siunitx">siunitx</a> 包格式化所有数字、货币、单位等：
@@ -393,10 +393,45 @@ You can also round numbers, for example <span class="k">\num</span><span class="
     <span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="图形格式">图形格式</h2>
-<p>我们建议将所有图表保存为<code>EPS</code>格式。这样，您可以同时使用<code>latex</code>和<code>pdflatex</code>来生成文档，并欣赏精美的矢量图形和文本。</p>
-<p>自 2015 年 9 月起，在 Mac OS X 上以及使用最新版本的 Python、Matplotlib 和 TeX Live 时，打印直接用 Matplotlib 保存为 <code>PDF</code> 格式的图表时会有一些质量损失。打印在纸上时，这个问题会更加明显；您可以亲自尝试一下。这也是为什么最好将 Matplotlib 生成的图片保存为 <code>EPS</code> 格式的原因之一。如果您确实只想保留图表的 PDF 版本，请使用 <code>epspdf</code> 命令行工具——生成的 PDF 会比直接用 Matplotlib 生成的 PDF 更好。</p>
-<p>为了完整起见，请注意 Matplotlib 的另一个后端 <a href="http://matplotlib.org/users/pgf.html">PGF</a> ，其结果略胜一筹。然而，截至 2015 年 9 月，生成的 PDF 文件大小是使用默认后端和 <code>epspdf</code> 生成的 PDF 文件的两倍。</p>
-<p>Matplotlib 即使使用 <a href="http://matplotlib.org/users/tight_layout_guide.html">紧凑的布局功能</a> ，有时也会在页边距中添加过多的空白。一个漂亮的命令行工具 <code>pdfcrop</code>，可以将 PDF 裁剪到最紧密的边界框。</p>
+<p>图片格式应与论文的编译方式和图片内容相配合，不能统一要求所有图都保存为 EPS：</p>
+<table>
+<thead>
+<tr>
+<th>使用场景</th>
+<th>常用格式</th>
+<th>选择时注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>使用 pdfLaTeX、XeLaTeX 或 LuaLaTeX 插入曲线图、流程图</td>
+<td>PDF</td>
+<td>保留矢量线条和文字，缩放后检查字体与符号是否完整</td>
+</tr>
+<tr>
+<td>使用传统 LaTeX → DVI → PostScript 流程</td>
+<td>EPS</td>
+<td>按该流程或投稿模板的说明使用；pdfLaTeX 使用 EPS 通常还需要转换</td>
+</tr>
+<tr>
+<td>照片、软件截图等位图</td>
+<td>PNG 或 JPEG</td>
+<td>按最终插入尺寸检查清晰度；提高导出分辨率不会补回原图丢失的细节</td>
+</tr>
+</tbody>
+</table>
+<p>Matplotlib 可直接导出 PDF 和 PNG。下面的例子从同一幅图保存两个文件，文件扩展名决定导出格式：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"y"</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"curve.pdf"</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">"tight"</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">"curve.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">"tight"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</code></pre></div>
+<p>保存后，把图片插入实际论文模板，检查最终 PDF 中的文字、边距和线条。投稿方指定格式时，以投稿说明为准。具体选项见 <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html">Matplotlib 保存图片说明</a>，LaTeX 图片格式可参考 <a href="https://www.overleaf.com/learn/latex/Inserting_Images">Overleaf 图片插入说明</a>。</p>
 <h2 id="将图形的部分栅格化">将图形的部分栅格化</h2>
 <p>如果绘图中包含大量数据点，生成的 EPS 文件可能会非常大。您可以将图形保存为 PNG 文件，但这会导致文本模糊。解决方案是将图形的部分内容栅格化，即告诉 <code>matplotlib</code> 数据点必须在 EPS 文件中渲染为位图，其余部分则渲染为矢量格式。</p>
 <p>您可以将 <code>rasterized=True</code> 关键字传递给 <code>matplotlib</code> 中的大多数绘图函数。您还可以使用 <code>zorder</code> 来设置不同的图层，并使用轴的 <code>set_rasterization_zorder()</code> 方法告诉 <code>matplotlib</code> 对给定 <code>zorder</code> 以下的所有图层进行栅格化。有关栅格化的示例，请参阅 <a href="https://github.com/Wookai/paper-tips-and-tricks/blob/master/src/python/figure_rasterized_example.py">figure_rasterized_example.py</a> 和 http://matplotlib.org/examples/misc/rasterization_demo.html。</p>
@@ -421,23 +456,27 @@ You can also round numbers, for example <span class="k">\num</span><span class="
 </ul>
 <h1 id="有用的资源">有用的资源</h1>
 <ul>
-<li>自动将标题大写: https://capitalizemytitle.com</li>
-<li>芝加哥格式手册: http://www.chicagomanualofstyle.org</li>
-<li>命令行检查模棱两可的词语、被动语态等: https://github.com/devd/Academic-Writing-Check</li>
-<li>LaTeX 2e 使用基本指南: http://ctan.math.utah.edu/ctan/tex-archive/info/l2tabu/english/l2tabuen.pdf</li>
+<li><a href="https://capitalizemytitle.com">自动将标题大写</a></li>
+<li><a href="http://www.chicagomanualofstyle.org">芝加哥格式手册</a></li>
+<li><a href="https://github.com/devd/Academic-Writing-Check">命令行检查模棱两可的词语、被动语态等</a></li>
+<li><a href="http://ctan.math.utah.edu/ctan/tex-archive/info/l2tabu/english/l2tabuen.pdf">LaTeX 2e 使用基本指南</a></li>
 <li><a href="https://github.com/Wookai/paper-tips-and-tricks/tree/master">撰写科学论文的技巧和窍门</a></li>
-</ul></div>
+</ul>
+<p>补充提示：插图导出后请检查文字、线条和图例是否清晰，再放入论文正文。</p>
+<p>导出后可先打开 PDF 检查文字是否清晰、图例是否完整，再查看 PNG 在最终版心宽度下的显示效果。若图片来自脚本，建议同时保留脚本和导出的文件名，后续修改数据时更容易重新生成同一张图。</p></div>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-left" href="../CONTRIBUTING/" title="贡献指南"><span class="icon icon-circle-arrow-left"></span> 前一页</a>
-<a class="btn btn-neutral float-right" href="../bib_reference_guide/" title="Latex文献引用编译办法">后一页 <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-left" href="../CONTRIBUTING/" title="贡献指南"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../bib_reference_guide/" title="Latex文献引用编译办法">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">
 <!-- Copyright etc -->
 <p>OpenHUTB 版权所有 © 2026</p>
 </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
 </div>
 </div>
@@ -446,10 +485,10 @@ You can also round numbers, for example <span class="k">\num</span><span class="
 <div aria-label="Versions" class="rst-versions" role="note">
 <span class="rst-current-version" data-toggle="rst-current-version">
 <span>
-<a href="https://github.com/OpenHUTB/.github" style="color: #fcfcfc">OpenHUTB</a>
+<a class="fa fa-github" href="https://github.com/OpenHUTB/.github" style="color: #fcfcfc"> GitHub</a>
 </span>
-<span><a href="../CONTRIBUTING/" style="color: #fcfcfc">« 前一页</a></span>
-<span><a href="../bib_reference_guide/" style="color: #fcfcfc">后一页 »</a></span>
+<span><a href="../CONTRIBUTING/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../bib_reference_guide/" style="color: #fcfcfc">Next »</a></span>
 </span>
 </div>
 <script src="../js/jquery-3.6.0.min.js"></script>

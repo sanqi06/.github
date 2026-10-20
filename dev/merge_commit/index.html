@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://openhutb.github.io/.github/dev/merge_commit/" rel="canonical"/>
 <link href="../../img/favicon.ico" rel="shortcut icon"/>
 <title>合并提交 - 社区介绍</title>
 <link href="../../css/theme.css" rel="stylesheet"/>
@@ -14,7 +14,7 @@
         // Current page data
         var mkdocs_page_name = "\u5408\u5e76\u63d0\u4ea4";
         var mkdocs_page_input_path = "dev/merge_commit.md";
-        var mkdocs_page_url = null;
+        var mkdocs_page_url = "/.github/dev/merge_commit/";
       </script>
 <!--[if lt IE 9]>
       <script src="../../js/html5shiv.min.js"></script>
@@ -30,7 +30,7 @@
 <a class="icon icon-home" href="../.."> 社区介绍
         </a><div role="search">
 <form action="../../search.html" class="wy-form" id="rtd-search-form" method="get">
-<input aria-label="Search docs" name="q" placeholder="搜索文档" title="Type search term here" type="text"/>
+<input aria-label="Search docs" name="q" placeholder="Search docs" title="Type search term here" type="text"/>
 </form>
 </div>
 </div>
@@ -81,19 +81,31 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../sign_up/">注册 Github 账号</a>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../vscode_push/">使用 VScode 推送代码</a>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../pycharm-tutorial/">PyCharm 教程</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../resolve_conflict/">使用 TortoiseGit 解决冲突</a>
 </li>
-<li class="toctree-l1 current"><a class="reference internal current" href="#">合并提交</a>
+<li class="toctree-l1 current"><a class="reference internal current" href="./">合并提交</a>
 <ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="#摘樱桃chery-pick">摘樱桃（chery pick）</a>
+<li class="toctree-l2"><a class="reference internal" href="#摘取指定提交cherry-pick">摘取指定提交（Cherry-pick）</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#操作步骤">操作步骤</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#完成后检查">完成后检查</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#参考">参考</a>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../vm_disk/">给 Ubuntu 虚拟机硬盘扩容</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../note/">注意事项</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../wsl/">wsl 安装与配置和卸载</a>
 </li>
 </ul>
 <p class="caption"><span class="caption-text">工具与资源</span></p>
@@ -109,8 +121,6 @@
 </ul>
 <p class="caption"><span class="caption-text">学习与论文</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../bib_reference_guide/">Latex文献引用编译办法</a>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../../undergraduate/">本科毕业设计</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../paper/avf/">论文成果：AVF-BEL 视听融合</a>
@@ -135,7 +145,7 @@
 <li class="breadcrumb-item">贡献相关</li>
 <li class="breadcrumb-item active">合并提交</li>
 <li class="wy-breadcrumbs-aside">
-<a href="https://github.com/OpenHUTB/.github/edit/master/docs/dev/merge_commit.md"> 编辑页面</a>
+<a class="icon icon-github" href="https://github.com/OpenHUTB/.github/edit/master/docs/dev/merge_commit.md"> Edit on GitHub</a>
 </li>
 </ul>
 <hr/>
@@ -143,22 +153,36 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <div><h1 id="合并提交">合并提交</h1>
-<h2 id="摘樱桃chery-pick">摘樱桃（chery pick）</h2>
+<h2 id="摘取指定提交cherry-pick">摘取指定提交（Cherry-pick）</h2>
+<p>如果只想把另一个分支中的几次修改带到当前分支，可以使用 Cherry-pick。例如，将 <code>docs-fix</code> 分支中的一处文档修正带到 <code>master</code>，接收修改的分支是 <code>master</code>，提供提交的分支是 <code>docs-fix</code>。</p>
+<h3 id="操作步骤">操作步骤</h3>
 <ol>
-<li>在 TortoiseGit 中切换到合并的源分支，需要摘取的多个提交，右键选择<code>Cherry Pick selected commits...</code>。</li>
-<li>在弹出的页面中选择并调整需要提交的顺序，点击 <code>Contine</code>。</li>
-</ol></div>
+<li>先检查工作区，将尚未提交的修改提交或暂存到 Stash，避免与本次操作混在一起。</li>
+<li>在仓库目录右键选择 <code>TortoiseGit → Switch/Checkout</code>，切换到<strong>接收修改的目标分支</strong>。以上面的例子来说，应切换到 <code>master</code>。</li>
+<li>打开 <code>TortoiseGit → Show log</code>，在日志窗口中选择源分支 <code>docs-fix</code>，查看需要摘取的提交。这里只切换日志显示的分支，不再切换工作区分支。</li>
+<li>选中需要的提交，右键选择 <code>Cherry Pick this commit...</code>；选中多个提交时，选择对应的批量摘取选项。</li>
+<li>在弹出的窗口中检查提交列表和顺序。如果后面的修改依赖前面的修改，应先应用较早的提交，再点击 <code>Continue</code>。</li>
+</ol>
+<h3 id="完成后检查">完成后检查</h3>
+<p>操作完成后，查看当前分支的日志和文件差异，确认需要的修改已经进入目标分支。检查文档页面或运行相关程序，确认没有问题后再推送该分支。源分支中的原提交仍然保留。</p>
+<p>如果出现冲突，先按<a href="../../resolve_conflict/">解决冲突</a>中的步骤处理文件，再回到 Cherry-pick 窗口继续操作；不要直接另开普通提交窗口结束本次操作。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://tortoisegit.org/docs/tortoisegit/tgit-dug-cherrypick.html">TortoiseGit：摘取提交</a></li>
+</ul></div>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
-<a class="btn btn-neutral float-left" href="../../resolve_conflict/" title="使用 TortoiseGit 解决冲突"><span class="icon icon-circle-arrow-left"></span> 前一页</a>
-<a class="btn btn-neutral float-right" href="../vm_disk/" title="给 Ubuntu 虚拟机硬盘扩容">后一页 <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-left" href="../../resolve_conflict/" title="使用 TortoiseGit 解决冲突"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../vm_disk/" title="给 Ubuntu 虚拟机硬盘扩容">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">
 <!-- Copyright etc -->
 <p>OpenHUTB 版权所有 © 2026</p>
 </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
 </div>
 </div>
@@ -167,10 +191,10 @@
 <div aria-label="Versions" class="rst-versions" role="note">
 <span class="rst-current-version" data-toggle="rst-current-version">
 <span>
-<a href="https://github.com/OpenHUTB/.github" style="color: #fcfcfc">OpenHUTB</a>
+<a class="fa fa-github" href="https://github.com/OpenHUTB/.github" style="color: #fcfcfc"> GitHub</a>
 </span>
-<span><a href="../../resolve_conflict/" style="color: #fcfcfc">« 前一页</a></span>
-<span><a href="../vm_disk/" style="color: #fcfcfc">后一页 »</a></span>
+<span><a href="../../resolve_conflict/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../vm_disk/" style="color: #fcfcfc">Next »</a></span>
 </span>
 </div>
 <script src="../../js/jquery-3.6.0.min.js"></script>
