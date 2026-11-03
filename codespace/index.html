@@ -60,10 +60,6 @@
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../bib_reference_guide/">Latex文献引用编译办法</a>
-</li>
-</ul>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../env_conf/">搭建自定义开发环境</a>
 </li>
 </ul>
@@ -88,6 +84,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#2-启用自动化流水线">2. 启用自动化流水线</a>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#3-修改项目">3. 修改项目</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#在-codespace-中预览完整文档网站">在 Codespace 中预览完整文档网站</a>
+</li>
+</ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#4-提交修改">4. 提交修改</a>
 </li>
@@ -96,6 +96,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#6-创建-pull-request">6. 创建 Pull Request</a>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#暂时离开与下次继续">暂时离开与下次继续</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#继续编辑时的检查">继续编辑时的检查</a>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#离开前的检查">离开前的检查</a>
 </li>
@@ -120,8 +122,6 @@
 </ul>
 <p class="caption"><span class="caption-text">工具与资源</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../introduction/">模拟器演示：涉水效果</a>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/">开源工具列表</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../blender/">三维建模软件 Blender 介绍</a>
@@ -131,6 +131,8 @@
 </ul>
 <p class="caption"><span class="caption-text">学习与论文</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../bib_reference_guide/">Latex文献引用编译办法</a>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../undergraduate/">本科毕业设计</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../paper/avf/">论文成果：AVF-BEL 视听融合</a>
@@ -184,6 +186,23 @@
 <p>点击左边“资源管理器”中的文件，并在中间进行编辑。点击编辑区右上角的“Open Preview to the side”来打开修改的预览</p>
 <p><img alt="" src="../img/codespace/edit.png"/></p>
 <p>编辑完成后，按 <code>Ctrl+S</code> 保存文件，并通过预览检查内容和排版。保存只会更新当前 Codespace 中的文件，还需要按照下一步完成“提交”和“同步更改”，才能将修改上传到个人 GitHub 仓库。</p>
+<h3 id="在-codespace-中预览完整文档网站">在 Codespace 中预览完整文档网站</h3>
+<p>编辑器侧边的 Markdown 预览适合检查段落和列表。修改导航、公式或站点插件相关内容时，还应启动项目的 MkDocs 网站，检查实际页面。本节以 <code>OpenHUTB/.github</code> 文档仓库为例。</p>
+<p>打开终端，进入同时包含 <code>mkdocs.yml</code> 和 <code>requirements.txt</code> 的仓库根目录，然后执行：</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+<span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>mkdocs<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+python<span class="w"> </span>-m<span class="w"> </span>mkdocs<span class="w"> </span>serve<span class="w"> </span>--dev-addr<span class="w"> </span><span class="m">0</span>.0.0.0:8000
+</code></pre></div>
+<p>这里的激活命令适用于 Codespaces 常见的 Linux 终端；已建好 <code>.venv</code> 时只需重新激活，不必重复创建。安装依赖后，等待终端出现服务启动信息，再打开底部的“端口（Ports）”标签页：</p>
+<ol>
+<li>找到 <code>8000</code> 端口；未自动出现时，点击“添加端口”并输入 <code>8000</code>。</li>
+<li>点击该端口的“在浏览器中打开”。保留端口的专用可见性即可，个人检查无需公开端口。</li>
+<li>从网站导航进入本次修改的页面，检查图片、站内链接、公式和目录。保存源文件后，等待构建完成，再刷新页面确认变化。</li>
+</ol>
+<p>此时应使用端口面板提供的转发地址；个人电脑的 <code>localhost:8000</code> 并不是 Codespace 的地址。若配置中的 <code>site_url</code> 带有子路径，终端给出的访问路径可能也带有该前缀，应保留完整路径。</p>
+<p>检查结束后，在运行服务的终端按 <code>Ctrl+C</code> 停止。这个预览地址只在服务运行期间可用；正式发布后的固定地址仍按第 5 步检查。站点输出目录 <code>site/</code> 和 <code>.venv/</code> 不加入本次提交。</p>
+<p>命令说明见 <a href="https://www.mkdocs.org/user-guide/configuration/#dev_addr">MkDocs：开发服务器地址</a>，端口操作见 <a href="https://docs.github.com/zh/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace">GitHub：转发 Codespaces 端口</a>。</p>
 <h2 id="4-提交修改">4. 提交修改</h2>
 <p>点击左侧分叉图标的“源代码管理”，弹出提交页面。
 点击更改的内容，确认中间的工作树对比中（左侧为修改之前的内容，右侧为修改之后的内容）的修改为想要修改的内容。再填写提交信息，点击“提交”。</p>
@@ -216,6 +235,14 @@
 <p>下次继续时，在同一列表中打开原来的 Codespace，即可恢复已保存的文件；之前运行的预览服务等进程需要重新启动。停止环境不会把尚未推送的提交上传到 GitHub，提交后仍应在仓库页面检查记录。</p>
 <p>停止后不再产生该环境的计算用量，但保存环境仍会占用存储额度。只打算暂时离开时选择停止，长期不用时可在确认所需内容已推送或备份后再决定是否删除。</p>
 <p>操作说明见 <a href="https://docs.github.com/zh/codespaces/developing-in-a-codespace/stopping-and-starting-a-codespace">GitHub：停止和启动 Codespace</a>。</p>
+<h2 id="继续编辑时的检查">继续编辑时的检查</h2>
+<p>重新进入 Codespace 后，在终端依次检查：</p>
+<ul>
+<li>运行 <code>git branch --show-current</code>，确认分支与原 Pull Request 的来源分支一致。</li>
+<li>运行 <code>git status --short</code>，查看已修改、已暂存和未跟踪的文件，确认列表里都是本次需要处理的内容。</li>
+<li>运行 <code>git diff</code> 查看尚未暂存的修改，再运行 <code>git diff --cached</code> 查看已暂存的修改。两处都核对后，再继续编辑、提交和推送。</li>
+</ul>
+<p>如果分支或文件列表与预期不符，先弄清已有修改的用途，保存好需要保留的内容，再继续操作。</p>
 <h2 id="离开前的检查">离开前的检查</h2>
 <p>结束编辑前，请确认文件已保存，并查看待提交文件列表；需要稍后继续时，记下当前分支和最后一次提交。这样重新打开环境后，可以从同一位置继续处理。</p></div>
 </div>

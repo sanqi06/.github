@@ -64,10 +64,6 @@
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../bib_reference_guide/">Latex文献引用编译办法</a>
-</li>
-</ul>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../env_conf/">搭建自定义开发环境</a>
 </li>
 </ul>
@@ -106,8 +102,6 @@
 </ul>
 <p class="caption"><span class="caption-text">工具与资源</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../introduction/">模拟器演示：涉水效果</a>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/">开源工具列表</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../blender/">三维建模软件 Blender 介绍</a>
@@ -117,6 +111,8 @@
 </ul>
 <p class="caption"><span class="caption-text">学习与论文</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../bib_reference_guide/">Latex文献引用编译办法</a>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../undergraduate/">本科毕业设计</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../paper/avf/">论文成果：AVF-BEL 视听融合</a>
@@ -436,6 +432,38 @@ You can also round numbers, for example <span class="k">\num</span><span class="
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
 </code></pre></div>
 <p>保存后，把图片插入实际论文模板，检查最终 PDF 中的文字、边距和线条。投稿方指定格式时，以投稿说明为准。具体选项见 <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html">Matplotlib 保存图片说明</a>，LaTeX 图片格式可参考 <a href="https://www.overleaf.com/learn/latex/Inserting_Images">Overleaf 图片插入说明</a>。</p>
+<h2 id="保留绘图数据方便复查同一张图">保留绘图数据，方便复查同一张图</h2>
+<p>只保留图片，后续修改坐标轴或图例时可能找不回当时的数据。建议将绘图脚本和实际使用的数据一起保存；如果示例含随机数，同时固定随机种子。下面的例子第一次运行时保存数据，此后直接读取同一份 CSV，再导出 PDF 和 PNG：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"figures"</span><span class="p">)</span>
+<span class="n">output</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data_file</span> <span class="o">=</span> <span class="n">output</span> <span class="o">/</span> <span class="s2">"line_points.csv"</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">data_file</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)),</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">","</span><span class="p">,</span>
+               <span class="n">header</span><span class="o">=</span><span class="s2">"x,y"</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">","</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">unpack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span> <span class="o">/</span> <span class="mf">2.54</span><span class="p">,</span> <span class="mi">6</span> <span class="o">/</span> <span class="mf">2.54</span><span class="p">),</span> <span class="n">layout</span><span class="o">=</span><span class="s2">"constrained"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"o"</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"samples"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">"y"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">output</span> <span class="o">/</span> <span class="s2">"line.pdf"</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">output</span> <span class="o">/</span> <span class="s2">"line.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="固定绘图数据后导出的折线图，包含 40 个采样点" src="../img/plot_data_example.png"/></p>
+<p>上图是示例数据对应的 PNG 输出，用于对照点的位置、坐标范围和图例是否一致。它展示的是随机示例数据，不代表实际实验结果。</p>
+<p>此处图幅为宽 8 cm、高 6 cm；Matplotlib 的 <code>figsize</code> 使用英寸，因此要除以 2.54。没有使用 <code>bbox_inches="tight"</code>，以保留指定的整体画布尺寸。将图片插入正文后，仍需按实际显示宽度检查字号与图例。</p>
+<p>复查时连续运行两次，确认 <code>line_points.csv</code> 内容未变，两种格式中的点和曲线一致。修改真实实验数据时应另存一份有明确含义的数据文件，并修改脚本的读取路径，避免把旧数据误当作新结果。固定种子用于重复生成示例数据，不能保证不同 NumPy 或 Matplotlib 版本导出的图片文件逐字节相同；需要长期复查时，同时记录这些依赖的版本。</p>
+<p>参考 <a href="https://numpy.org/doc/stable/reference/random/generator.html">NumPy：随机数生成器</a>和 <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html">Matplotlib：图幅尺寸</a>。</p>
 <h2 id="将图形的部分栅格化">将图形的部分栅格化</h2>
 <p>如果绘图中包含大量数据点，生成的 EPS 文件可能会非常大。您可以将图形保存为 PNG 文件，但这会导致文本模糊。解决方案是将图形的部分内容栅格化，即告诉 <code>matplotlib</code> 数据点必须在 EPS 文件中渲染为位图，其余部分则渲染为矢量格式。</p>
 <p>您可以将 <code>rasterized=True</code> 关键字传递给 <code>matplotlib</code> 中的大多数绘图函数。您还可以使用 <code>zorder</code> 来设置不同的图层，并使用轴的 <code>set_rasterization_zorder()</code> 方法告诉 <code>matplotlib</code> 对给定 <code>zorder</code> 以下的所有图层进行栅格化。有关栅格化的示例，请参阅 <a href="https://github.com/Wookai/paper-tips-and-tricks/blob/master/src/python/figure_rasterized_example.py">figure_rasterized_example.py</a> 和 http://matplotlib.org/examples/misc/rasterization_demo.html。</p>
@@ -452,7 +480,7 @@ You can also round numbers, for example <span class="k">\num</span><span class="
 <li>所有文中的符号都是公式符号，而不是英文</li>
 <li>latex 编译生成中间文件（ <em>.aux, </em>.log等）和输出pdf文件不用放到仓库</li>
 <li>一次性不要提交太多文件，不好审核，提交前检查下，比如大的二进制文件可以提供一个下载链接</li>
-<li>缓存、输出文件必须要放到仓库，比如：__pycache__不需要的缓存文件、训练的模型、中间记录文件、.pyc文件、checkpoint文件、<em>.pth文件最多放一个、</em>.npy文件等</li>
+<li>缓存、不必要的输出文件不要放到仓库，比如：__pycache__不需要的缓存文件、训练的模型、中间记录文件、.pyc文件、checkpoint文件、<em>.pth文件最多放一个、</em>.npy文件等</li>
 </ul>
 <h2 id="其他">其他</h2>
 <ul>
@@ -468,12 +496,18 @@ You can also round numbers, for example <span class="k">\num</span><span class="
 <li><a href="https://tool.yovisun.com/scihub/">论文下载工具 sci-hub</a></li>
 </ul>
 <p>补充提示：插图导出后请检查文字、线条和图例是否清晰，再放入论文正文。</p>
-<p>导出后可先打开 PDF 检查文字是否清晰、图例是否完整，再查看 PNG 在最终版心宽度下的显示效果。若图片来自脚本，建议同时保留脚本和导出的文件名，后续修改数据时更容易重新生成同一张图。</p></div>
+<p>导出后可先打开 PDF 检查文字是否清晰、图例是否完整，再查看 PNG 在最终版心宽度下的显示效果。若图片来自脚本，建议同时保留脚本和导出的文件名，后续修改数据时更容易重新生成同一张图。</p>
+<h2 id="插图放入正文后的检查">插图放入正文后的检查</h2>
+<ul>
+<li>按正文中的实际宽度查看图片，确认坐标刻度、图例和注释能直接读清，不只检查放大后的效果。</li>
+<li>导出整篇 PDF 后重新检查图像边缘，确认标题、单位和图例没有被裁切，图号与正文引用相符。</li>
+<li>涉及多条曲线时，检查线型、标记和颜色是否容易区分；打印成灰度后也应能对应到图例。</li>
+</ul></div>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
 <a class="btn btn-neutral float-left" href="../CONTRIBUTING/" title="贡献指南"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-<a class="btn btn-neutral float-right" href="../bib_reference_guide/" title="Latex文献引用编译办法">Next <span class="icon icon-circle-arrow-right"></span></a>
+<a class="btn btn-neutral float-right" href="../env_conf/" title="搭建自定义开发环境">Next <span class="icon icon-circle-arrow-right"></span></a>
 </div>
 <hr/>
 <div role="contentinfo">
@@ -493,7 +527,7 @@ You can also round numbers, for example <span class="k">\num</span><span class="
 <a class="fa fa-github" href="https://github.com/OpenHUTB/.github" style="color: #fcfcfc"> GitHub</a>
 </span>
 <span><a href="../CONTRIBUTING/" style="color: #fcfcfc">« Previous</a></span>
-<span><a href="../bib_reference_guide/" style="color: #fcfcfc">Next »</a></span>
+<span><a href="../env_conf/" style="color: #fcfcfc">Next »</a></span>
 </span>
 </div>
 <script src="../js/jquery-3.6.0.min.js"></script>

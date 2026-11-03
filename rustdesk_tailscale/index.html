@@ -60,10 +60,6 @@
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../bib_reference_guide/">Latex文献引用编译办法</a>
-</li>
-</ul>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="../env_conf/">搭建自定义开发环境</a>
 </li>
 </ul>
@@ -79,6 +75,18 @@
 <li class="toctree-l2"><a class="reference internal" href="#高级操作">高级操作</a>
 <ul>
 <li class="toctree-l3"><a class="reference internal" href="#邀请其他成员进入虚拟局域网">邀请其他成员进入虚拟局域网</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#附通过-ssh-登录服务器">附：通过 SSH 登录服务器</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#常见报错tailnet-policy-does-not-permit-you-to-ssh-to-this-node">常见报错：tailnet policy does not permit you to SSH to this node</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#解决方法在服务器上执行">解决方法（在服务器上执行）</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#连接方式">连接方式</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#原理">原理</a>
 </li>
 </ul>
 </li>
@@ -118,8 +126,6 @@
 </ul>
 <p class="caption"><span class="caption-text">工具与资源</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../introduction/">模拟器演示：涉水效果</a>
-</li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/">开源工具列表</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../blender/">三维建模软件 Blender 介绍</a>
@@ -129,6 +135,8 @@
 </ul>
 <p class="caption"><span class="caption-text">学习与论文</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../bib_reference_guide/">Latex文献引用编译办法</a>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../undergraduate/">本科毕业设计</a>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../paper/avf/">论文成果：AVF-BEL 视听融合</a>
@@ -201,10 +209,10 @@
 <p>如果连接时报错：<code>连接错误 Failed to connect to 100.*.*.*:21118:请稍后再试</code>，确认被控端下面是否有“服务未运行”的提示，如果有请点击“启动服务”，然后再次连接即可。额外排查：确认被控端防火墙没有拦截 TCP 21118 端口。</p>
 </div>
 <h2 id="附windows远程登录">附：Windows远程登录</h2>
-<p>注意：（Windows 家庭版不支持作为被控端开启系统自带远程桌面（RDP），家庭版请使用 RustDesk。）</p>
-<p>在被控机上启用 Windows 远程桌面连接</p>
+<p>先确认被控机的 Windows 版本：打开“设置 → 系统 → 系统信息”，查看 Windows 版本。Windows 专业版、企业版和教育版可以接受内置远程桌面连接；家庭版可以连接其他电脑，但不能作为这种连接的被控端。家庭版被控机可使用前面的 RustDesk 方式。</p>
+<p>在支持的被控机上，打开“设置 → 系统 → 远程桌面”并启用连接。确认两台设备都已接入 Tailscale，且被控机保持开机、联网，没有进入睡眠状态。</p>
 <p><img alt="" src="../img/rustdesk/enable_remote.png"/></p>
-<p>如果远程的机器为 Windows，只需要打开本地电脑的<code>远程桌面连接</code>，使用 tailscale 的 IP 地址（将图中的型号<code>*</code>换成自己的IP地址），输入Windows系统的用户名/密码即可登录。
+<p>在本地电脑打开<code>远程桌面连接</code>，输入被控机的 Tailscale IP 地址，再使用被控机上有远程登录权限的 Windows 账户和密码登录。这里使用账户密码，不是平时解锁电脑时输入的 Windows Hello PIN。图中的 <code>*</code> 需要替换为实际 IP 地址。
  <img alt="" src="../img/rustdesk/win_remote.png"/></p>
 <div class="admonition 注意">
 <p class="admonition-title">注意</p>
@@ -228,10 +236,50 @@
 <li>接受后在 admin/machines 里即可看到该设备，用  服务器ip地址  访问</li>
 </ol>
 <p><img alt="" src="../img/rustdesk/Share%20successful.png"/></p>
+<h2 id="附通过-ssh-登录服务器">附：通过 SSH 登录服务器</h2>
+<p>前面的 RustDesk 和 Windows 远程桌面适合需要图形界面的场景。如果被控端是 Linux（例如 Ubuntu），并且只需要命令行，直接用 SSH 登录会更轻量。这一节的网络通道仍然由 Tailscale 提供，但认证交给系统自带的 SSH 服务，可以绕开 Tailscale 自带 SSH 的账号限制。</p>
+<h3 id="常见报错tailnet-policy-does-not-permit-you-to-ssh-to-this-node">常见报错：tailnet policy does not permit you to SSH to this node</h3>
+<p>服务器开启 Tailscale 自带的 SSH 功能后，客户端执行 <code>ssh</code> 时可能报错：</p>
+<div class="highlight"><pre><span></span><code>tailnet policy does not permit you to SSH to this node
+</code></pre></div>
+<p>原因是 Tailscale SSH 有一条强制规则：用户只能 SSH 到属于自己账号的设备。当服务器是别人共享给你的设备时，它的所有者不是你的账号，所以无论怎样修改 <a href="https://login.tailscale.com/admin/acls">ACL 策略</a> 都不会被授权。这种情况下要改的不是 ACL，而是认证方式。</p>
+<h3 id="解决方法在服务器上执行">解决方法（在服务器上执行）</h3>
+<ol>
+<li>
+<p>关闭 Tailscale 自带的 SSH 认证拦截：</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tailscale<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--ssh<span class="o">=</span><span class="nb">false</span>
+</code></pre></div>
+</li>
+<li>
+<p>确认系统原生的 SSH 服务已安装并启用：</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>ssh
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>ssh
+</code></pre></div>
+</li>
+</ol>
+<div class="admonition 提示">
+<p class="admonition-title">提示</p>
+<p>如果执行时报找不到 <code>ssh</code> 服务，说明服务器还没有安装 OpenSSH 服务端，先执行 <code>sudo apt install openssh-server</code>。</p>
+</div>
+<h3 id="连接方式">连接方式</h3>
+<p>在同样加入了 Tailscale 的客户端上执行：</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>&lt;服务器用户名&gt;@100.x.x.x
+</code></pre></div>
+<p>其中 <code>100.x.x.x</code> 是服务器的 Tailscale IP，可以在 <a href="https://console.tailscale.com/admin/machines">Tailscale 后台</a> 的设备列表里查看。输入服务器上该账号的系统密码即可登录。</p>
+<h3 id="原理">原理</h3>
+<ul>
+<li><strong>Tailscale 只负责网络层</strong>：让你的电脑和服务器处在同一个虚拟局域网中，通过 Tailscale IP 互相访问。</li>
+<li><strong>SSH 认证走系统原生体系</strong>：直接使用服务器本地的账号和密码验证，不再经过 Tailscale SSH 的 ACL 策略。</li>
+</ul>
+<div class="admonition 注意">
+<p class="admonition-title">注意</p>
+<p>关闭 Tailscale SSH 只影响“通过 Tailscale 使用 SSH”这一种方式，RustDesk、远程桌面等其他功能不受影响。如果服务器开启了防火墙，还需要确认放行 TCP 22 端口。</p>
+</div>
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://github.com/tailscale/tailscale">tailscale 源代码仓库</a> - <a href="https://tailscale.com/opensource">tailscale 开源介绍</a></li>
 <li><a href="https://github.com/rustdesk/rustdesk">rustdesk 源代码仓库</a></li>
+<li><a href="https://learn.microsoft.com/zh-cn/windows-server/remote/remote-desktop-services/remotepc/remote-desktop-allow-access">微软：启用远程桌面的条件与设置</a></li>
 <li><a href="https://www.cnblogs.com/lefour/p/18866579">使用 Tailscale 实现内网穿透+RDP远程控制</a></li>
 </ul></div>
 </div>
